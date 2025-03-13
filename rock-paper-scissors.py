@@ -30,6 +30,16 @@ def get_player_choice():
             return player_choice
 
 ##Generate computers choice
+def get_computer_choice():
+    """Generate a random choice of rock, paper, or scissors for the computer.
+
+    Return: computer_choice - variable holding the computers choice.
+    """
+    #List with possible choices
+    options = ["rock", "paper", "scissors"]
+    #Choose a random element from the options list.
+    computer_choice = random.choice(options)
+    return computer_choice
 
 #Determine the winner
 
