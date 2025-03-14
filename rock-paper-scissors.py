@@ -26,7 +26,6 @@ def get_player_choice():
             print("No input detected. Please enter 'rock', 'paper', or 'scissors'.")
         else:
             prompt = False
-            print(f"Your choice: {player_choice}!")
             return player_choice
 
 ##Generate computers choice
@@ -41,12 +40,88 @@ def get_computer_choice():
     computer_choice = random.choice(options)
     return computer_choice
 
-#Determine the winner
+#function to handle when player wins a round
+def player_round_win(player_choice, computer_choice):
+    """Display information for when the player wins a round.
 
-#Track score
+    Args:
+        player_choice (str): the players choice of rock, paper, or scissors.
+        computer_choice (str): the computers choice of rock, paper, or scissors.
+    """
+    print("** You win this round! **")
+    print(f"Your choice: {player_choice}")
+    print(f"Computer's choice: {computer_choice}")
 
-#Display results
+def computer_round_win(player_choice, computer_choice):
+    """Display information for when the computer wins a round.
 
-#ask user to play again
+    Args:
+        player_choice (str): the players choice of rock, paper, or scissors.
+        computer_choice (str): the computers choice of rock, paper, or scissors.
+    """
+    print("** The computer wins this round! **")
+    print(f"Your choice: {player_choice}")
+    print(f"Computer's choice: {computer_choice}")
+
+#Function to ask the user if they want to play again
+def play_again():
+    """Prompt the user for a yes or no if they want to play again.
+
+    """
+    responses = ("yes", "no")
+    prompt = True
+    while prompt:
+        user_input = input("Would you like to play again? (enter 'yes' or 'no') ").lower().strip()
+        if user_input not in responses:
+            print("invalid input, please enter 'yes' or 'no'.")
+        elif user_input in responses and user_input == "yes":
+            prompt = False
+            print("Great, have fun!")
+            play_game()
+        elif user_input in responses and user_input == "no":
+            prompt = False
+            print("Thanks for playing!")
 
 ##Create main game loop
+def play_game():
+    """Handle the flow of the game.
+
+    Args:
+        player_choice (str): the players choice of rock, paper, or scissors.
+        computer_choice (str): the computers choice of rock, paper, or scissors    
+        
+    """
+    player_score = 0
+    computer_score = 0
+    #Main game loop will loop until user or computer score is 3.
+    while player_score != 3 and computer_score != 3:
+        player_choice = get_player_choice()
+        computer_choice = get_computer_choice()
+        #Winning conditions for the user
+        if (player_choice == "rock" and computer_choice == "scissors") or \
+            (player_choice == "paper" and computer_choice == "rock") or \
+            (player_choice == "scissors" and computer_choice == "paper"):
+            player_round_win(player_choice, computer_choice)
+            player_score += 1
+            print(f"current score: You - {player_score} | Computer - {computer_score}")
+        #Winning conditions for the computer.
+        elif (computer_choice == "rock" and player_choice == "scissors") or \
+            (computer_choice == "paper" and player_choice == "rock") or \
+            (computer_choice == "scissors" and player_choice == "paper"):
+            computer_round_win(player_choice, computer_choice)
+            computer_score += 1
+            print(f"current score: You - {player_score} | Computer - {computer_score}")
+        else:
+            #Message to handle a tie.
+            print("Its a tie!")
+            print(f"Your choice: {player_choice}")
+            print(f"Computer's choice: {computer_choice}")
+    #Declare the winner and ask the user if they want to play again.
+    if player_score == 3:
+        print("Congrats you win!")
+        play_again()
+    elif computer_score == 3:
+        print("The computer wins!")
+        play_again()
+
+play_game()
