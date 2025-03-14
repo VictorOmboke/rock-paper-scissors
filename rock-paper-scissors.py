@@ -68,16 +68,22 @@ def play_again():
     """Prompt the user for a yes or no if they want to play again.
 
     """
+    #Initialize accepted responses in a tuple.
     responses = ("yes", "no")
     prompt = True
+    #Repeatedly prompt user if they want to keep playing or not.
     while prompt:
         user_input = input("Would you like to play again? (enter 'yes' or 'no') ").lower().strip()
+        #Check if users input is one of the acceptable responses.
         if user_input not in responses:
             print("invalid input, please enter 'yes' or 'no'.")
+        #Handle when user does want to play again.
         elif user_input in responses and user_input == "yes":
             prompt = False
             print("Great, have fun!")
+            #Play the game again by calling main game function.
             play_game()
+        #Handle when user does not want to play again.
         elif user_input in responses and user_input == "no":
             prompt = False
             print("Thanks for playing!")
@@ -85,11 +91,6 @@ def play_again():
 ##Create main game loop
 def play_game():
     """Handle the flow of the game.
-
-    Args:
-        player_choice (str): the players choice of rock, paper, or scissors.
-        computer_choice (str): the computers choice of rock, paper, or scissors    
-        
     """
     player_score = 0
     computer_score = 0
