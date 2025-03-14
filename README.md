@@ -14,4 +14,4 @@ A simple Python program that simulates the classic rock, paper, scissors game.
     1. Clone the repository.
     2. run the script using Python:
         ```bash
-        python rock-paper-scissors.py```
+        python rock-paper-scissors.py
